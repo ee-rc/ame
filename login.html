@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Login</h1>
+        </div>
+    </header>
+    <main>
+        <section class="auth-section">
+            <h2>เข้าสู่ระบบ</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">อีเมล</label>
+                    <input type="email" id="loginEmail" name="email" placeholder="กรอกอีเมล" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">รหัสผ่าน</label>
+                    <input type="password" id="loginPassword" name="password" placeholder="กรอกรหัสผ่าน" required>
+                </div>
+                <button type="submit" class="btn-submit">LOGIN</button>
+            </form>
+            <p>ยังไม่มีบัญชี? <a href="signin.html">สมัครสมาชิก</a></p>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // ดึงข้อมูลจาก Local Storage
+            const savedData = JSON.parse(localStorage.getItem("userData"));
+
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+
+            if (savedData && savedData.email === email && savedData.password === password) {
+                alert(`ยินดีต้อนรับ, ${savedData.username}!`);
+                window.location.href = "index.html"; // พาไปยังหน้าหลัก
+            } else {
+                alert("อีเมลหรือรหัสผ่านไม่ถูกต้อง!");
+            }
+        });
+    </script>
+</body>
+</html>
